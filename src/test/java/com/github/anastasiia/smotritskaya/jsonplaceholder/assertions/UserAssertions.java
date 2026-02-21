@@ -32,6 +32,23 @@ public class UserAssertions {
     }
 
     /**
+     * Сравнивает двух пользователей частично
+     *
+     * @param expected ожидаемый пользователь
+     * @param actual   фактический пользователь из ответа API
+     */
+    public static void assertNewUserEquals(User expected, User actual) {
+        assertAll(
+                () -> assertEquals(expected.getName(), actual.getName()),
+                () -> assertEquals(expected.getUsername(), actual.getUsername()),
+                () -> assertEquals(expected.getEmail(), actual.getEmail()),
+                () -> assertShortAddressesEquals(expected.getAddress(), actual.getAddress()),
+                () -> assertEquals(expected.getPhone(), actual.getPhone()),
+                () -> assertEquals(expected.getWebsite(), actual.getWebsite())
+        );
+    }
+
+    /**
      * Сравнивает два адреса по всем полям
      *
      * @param expected первый адрес
@@ -48,6 +65,26 @@ public class UserAssertions {
         );
     }
 
+    /**
+     * Сравнивает два адреса по полям: street, city, zipcode
+     *
+     * @param expected первый адрес
+     * @param actual   второй адрес
+     */
+    public static void assertShortAddressesEquals(Address expected, Address actual) {
+        assertAll(
+                () -> assertEquals(expected.getStreet(), actual.getStreet()),
+                () -> assertEquals(expected.getCity(), actual.getCity()),
+                () -> assertEquals(expected.getZipcode(), actual.getZipcode())
+        );
+    }
+
+    /**
+     * Сравнивает две компании по полям: name, catchPhrase, bs
+     *
+     * @param expected первый адрес
+     * @param actual   второй адрес
+     */
     public static void assertCompaniesEquals(Company expected, Company actual) {
         assertAll(
                 () -> assertEquals(expected.getName(), actual.getName()),

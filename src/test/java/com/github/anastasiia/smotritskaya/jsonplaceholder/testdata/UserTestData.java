@@ -44,4 +44,22 @@ public class UserTestData {
 
         return user;
     }
+
+    public static User getNewUser() {
+        User user = new User();
+        Address address = new Address();
+
+        address.setStreet("123 Main St");
+        address.setCity("New York");
+        address.setZipcode("10001");
+
+        user.setName("John Doe");
+        user.setUsername("johndoe");
+        user.setEmail("john@example.com");
+        user.setAddress(address);
+        user.setPhone("1-555-123-4567");
+        user.setWebsite("johndoe.com");
+
+        return user;
+    }
 }
