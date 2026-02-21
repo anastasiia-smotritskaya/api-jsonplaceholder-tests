@@ -1,5 +1,10 @@
 package com.github.anastasiia.smotritskaya.jsonplaceholder.models;
 
+/**
+ * Вспомогательный объект, содержащий адрес пользователя.
+ * Является частью модели {@link User}.
+ * Соответствует вложенному JSON-объекту "address" в ответе API.
+ */
 public class Address {
     private String street;
     private String suite;

@@ -1,5 +1,10 @@
 package com.github.anastasiia.smotritskaya.jsonplaceholder.models;
 
+/**
+ * Информация о компании, в которой работает пользователь.
+ * Вложен в объект {@link User}.
+ * Соответствует JSON-объекту "company".
+ */
 public class Company {
     private String name;
     private String catchPhrase;

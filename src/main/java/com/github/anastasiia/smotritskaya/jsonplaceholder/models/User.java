@@ -1,5 +1,8 @@
 package com.github.anastasiia.smotritskaya.jsonplaceholder.models;
 
+/**
+ * Модель пользователя, соответствующая JSON-объекту из API /users
+ */
 public class User {
     private String id;
     private String name;

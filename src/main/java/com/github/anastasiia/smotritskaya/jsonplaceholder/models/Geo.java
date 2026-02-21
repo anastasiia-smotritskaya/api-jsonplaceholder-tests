@@ -1,5 +1,10 @@
 package com.github.anastasiia.smotritskaya.jsonplaceholder.models;
 
+/**
+ * Координаты геолокации пользователя.
+ * Вложен в объект {@link Address}.
+ * Соответствует JSON-объекту "geo".
+ */
 public class Geo {
     private double lat;
     private double lng;
