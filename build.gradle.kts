@@ -16,7 +16,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("io.rest-assured:rest-assured:6.0.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.21.0")
-    implementation("io.qameta.allure:allure-gradle:2.8.1")
+    testImplementation("io.qameta.allure:allure-junit5:2.24.0")
 }
 
 tasks.test {
