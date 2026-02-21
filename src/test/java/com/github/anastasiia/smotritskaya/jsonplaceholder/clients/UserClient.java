@@ -1,13 +1,15 @@
 package com.github.anastasiia.smotritskaya.jsonplaceholder.clients;
 
 import com.github.anastasiia.smotritskaya.jsonplaceholder.models.User;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
 /**
- * HTTP клиент для работы с /users эндпоинтом
+ * HTTP клиент для работы с /users API
  * Предоставляет методы для выполнения запросов к API пользователей
  */
 public class UserClient {
@@ -27,5 +29,59 @@ public class UserClient {
                 .extract()
                 .jsonPath()
                 .getList(".", User.class);
+    }
+
+    /**
+     * Создание нового пользователя с id (статус-код 200)
+     *
+     * @param user данные нового пользователя
+     * @return User нового пользователя с автоматически созданным id
+     * @throws AssertionError если статус ответа не 201
+     */
+    public User createUser(User user) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(201)
+                .extract()
+                .as(User.class);
+    }
+
+    /**
+     * Создание нового пользователя с id (статус-код не указан)
+     *
+     * @param body тело запроса
+     * @return Response ответ со статусом, соответствующим данным в запросе (для проверок 400, 415)
+     */
+    public Response createUserRaw(Object body) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(body)
+                .when()
+                .post("/users")
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Создание нового пользователя с id (Content type не указан)
+     *
+     * @param user данные нового пользователя
+     * @return Response ответ
+     * @throws AssertionError если статус ответа не 415
+     */
+    public Response createUserWithoutContentType(User user) {
+        return given()
+                .body(user)
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(415)
+                .extract()
+                .response();
     }
 }
