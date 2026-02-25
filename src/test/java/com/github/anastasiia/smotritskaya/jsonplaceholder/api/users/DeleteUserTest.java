@@ -26,7 +26,7 @@ public class DeleteUserTest extends BaseTest {
 
     @Test
     @Disabled("Status code is incorrect: 200")
-    @DisplayName("DELETE /users -> 204 returns empty body for existing user")
+    @DisplayName("DELETE /users -> 204 No Content returns empty body for existing user")
     void deleteExistingUserTest() {
         Response response = userClient.deleteUser("1");
 
@@ -36,7 +36,7 @@ public class DeleteUserTest extends BaseTest {
 
     @Test
     @Disabled("Status code is incorrect: 200")
-    @DisplayName("DELETE /users -> 204 returns empty body for not existing user")
+    @DisplayName("DELETE /users -> 204 No Content returns empty body for not existing user")
     void deleteNotExistingUserTest() {
         Response response = userClient.deleteUser("999");
 
