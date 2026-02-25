@@ -13,13 +13,9 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
 import static com.github.anastasiia.smotritskaya.jsonplaceholder.assertions.UserAssertions.assertNewUserEquals;
-import static com.github.anastasiia.smotritskaya.jsonplaceholder.testdata.InvalidUserTestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("Users API")
@@ -48,21 +44,11 @@ public class CreateUserTest extends BaseTest {
     @ParameterizedTest(name = "[{index}] {1}")
     @Disabled("Status codes are incorrect: 201 or 500")
     @DisplayName("POST /users -> 400 Bad Request, returns correct status code if the body is invalid")
-    @MethodSource("invalidUserDataProvider")
+    @MethodSource("com.github.anastasiia.smotritskaya.jsonplaceholder.testdata.InvalidUserTestData#invalidUserDataProvider")
     void createUserInvalidBodyTest(String body, String description) {
         Response response = userClient.createUserRaw(body);
 
         assertEquals(400, response.getStatusCode());
-    }
-
-    private static Stream<Arguments> invalidUserDataProvider() {
-        return Stream.of(
-                Arguments.of(withNumberInEmail(), "Invalid user's email"),
-                Arguments.of(withObjectInPhone(), "Invalid user's phone number"),
-                Arguments.of(withExtraField(), "Object User has extra field"),
-                Arguments.of(emptyObject(), "Object User is empty"),
-                Arguments.of(malformedJson(), "Invalid JSON (brackets and quotation marks")
-        );
     }
 
     @Test
