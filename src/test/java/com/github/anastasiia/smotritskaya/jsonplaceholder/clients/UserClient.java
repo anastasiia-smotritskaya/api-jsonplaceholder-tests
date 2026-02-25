@@ -32,6 +32,21 @@ public class UserClient {
     }
 
     /**
+     * Получает данные пользователя по id
+     *
+     * @param id идентификатор пользователя
+     * @return Response объект для дальнейших проверок
+     */
+    public Response getUser(String id) {
+        return given()
+                .when()
+                .get("/users/" + id)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
      * Создание нового пользователя с id (статус-код 200)
      *
      * @param user данные нового пользователя
@@ -54,7 +69,7 @@ public class UserClient {
      * Создание нового пользователя с id (статус-код не указан)
      *
      * @param body тело запроса
-     * @return Response ответ со статусом, соответствующим данным в запросе (для проверок 400, 415)
+     * @return Response объект для дальнейших проверок
      */
     public Response createUserRaw(Object body) {
         return given()
@@ -71,7 +86,7 @@ public class UserClient {
      * Создание нового пользователя с id (Content type не указан)
      *
      * @param user данные нового пользователя
-     * @return Response ответ
+     * @return Response объект для дальнейших проверок
      * @throws AssertionError если статус ответа не 415
      */
     public Response createUserWithoutContentType(User user) {
@@ -89,7 +104,7 @@ public class UserClient {
      * Удаление пользователя по id
      *
      * @param id id пользователя
-     * @return Response ответ
+     * @return Response объект для дальнейших проверок
      */
     public Response deleteUser(String id) {
         return given()
