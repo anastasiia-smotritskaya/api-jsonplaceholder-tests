@@ -84,4 +84,18 @@ public class UserClient {
                 .extract()
                 .response();
     }
+
+    /**
+     * Удаление пользователя по id
+     *
+     * @param id id пользователя
+     * @return Response ответ
+     */
+    public Response deleteUser(String id) {
+        return given()
+                .when()
+                .delete("/users/" + id)
+                .then()
+                .extract().response();
+    }
 }
