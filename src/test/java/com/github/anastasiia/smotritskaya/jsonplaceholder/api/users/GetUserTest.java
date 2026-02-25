@@ -54,9 +54,10 @@ public class GetUserTest extends BaseTest {
 
     @ParameterizedTest(name = "[{index}] {1}")
     @Disabled("Status code is incorrect: 404")
-    @DisplayName("GET /user/{id} -> 400 Bad Request if id is invalid")
+    @DisplayName("GET /user/{id} -> 400 for invalid ID")
     @CsvSource({
             "'-1', 'Negative number as id'",
+            "'a', 'Letter as id'",
             "'#', 'Special character as id'"
     })
     void getUserInvalidIdTest(String id, String description) {

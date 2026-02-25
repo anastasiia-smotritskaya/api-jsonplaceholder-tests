@@ -113,4 +113,53 @@ public class UserClient {
                 .then()
                 .extract().response();
     }
+
+    /**
+     * Полное обновление данных пользователя по id
+     *
+     * @param id id пользователя
+     * @return Response объект для дальнейших проверок
+     */
+    public Response updateUser(User user, String id) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .when()
+                .put("/users/" + id)
+                .then()
+                .statusCode(200)
+                .extract().response();
+    }
+
+    /**
+     * Полное обновление данных пользователя по id (статус-код не указан)
+     *
+     * @param id id пользователя
+     * @return Response объект для дальнейших проверок
+     */
+    public Response updateUserRaw(String body, String id) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(body)
+                .when()
+                .put("/users/" + id)
+                .then()
+                .extract().response();
+    }
+
+    /**
+     * Полное обновление данных пользователя по id (Content type не указан)
+     *
+     * @param id id пользователя
+     * @return Response объект для дальнейших проверок
+     */
+    public Response updateUserWithoutContentType(User user, String id) {
+        return given()
+                .body(user)
+                .when()
+                .put("/users/" + id)
+                .then()
+                .statusCode(415)
+                .extract().response();
+    }
 }
